@@ -25,21 +25,6 @@ const authenticatedUser = (username,password)=>{ //returns boolean
     }
 }
 
-app.post('/register', (req, res) => {
-    let {username, password} = req.body;
-
-    if(username && password){
-        if(!isValid){
-            users.push({"username": username, "password": password});
-            return res.status(200).json({message: "User successfully registered. Now you can login"});
-        } else {
-            return res.status(404).json({message: "User already exists!"});
-        }
-    }
-     return res.status(404).json({message: "Unable to register user."});
-});
-
-
 //only registered users can login
 regd_users.post("/login", (req,res) => {
 
