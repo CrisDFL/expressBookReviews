@@ -31,7 +31,7 @@ public_users.get('/', function (req, res) {
 
    getBooks
         .then((bookList) => res.status(200).send(JSON.stringify(bookList, null, 4)))
-        .catch(err => res.status(500).json({ message: err }));
+        .catch(err => res.status(500).send({ message: err }));
 });
 
 // Get book details based on ISBN
@@ -48,8 +48,8 @@ public_users.get('/isbn/:isbn',function (req, res) {
     });
 
     getIsbn
-        .then(isbnList => res.status(200).json(isbnList))
-        .catch(err => res.status(404).json({ message: err }));
+        .then(isbnList => res.status(200).send(JSON.stringify(isbnList, null, 4)))
+        .catch(err => res.status(404).send({ message: err }));
  });
   
 // Get book details based on author
@@ -71,8 +71,8 @@ public_users.get('/author/:author',function (req, res) {
     });
       
     getAuthor
-        .then(authorList => res.status(200).json(authorList))
-        .catch(err => res.status(404).json({ message: err }));
+        .then(authorList => res.status(200).send(JSON.stringify(authorList, null, 4)))
+        .catch(err => res.status(404).send({ message: err }));
 
 });
 
@@ -95,8 +95,8 @@ public_users.get('/title/:title',function (req, res) {
     });
 
     getTitle
-        .then(titleList => res.status(200).json(titleList))
-        .catch(err => res.status(404).json({ message: err }));
+        .then(titleList => res.status(200).send(JSON.stringify(titleList, null, 4)))
+        .catch(err => res.status(404).send({ message: err }));
 });
 
 //  Get book review
@@ -105,9 +105,9 @@ public_users.get('/review/:isbn',function (req, res) {
   const book = books[isbn];
 
   if (book) {
-    return res.status(200).json(book.reviews);
+    return res.status(200).send(JSON.stringify(book.reviews, null, 4));
   } else {
-    return res.status(404).json({ message: "Libro no encontrado" });
+    return res.status(404).send({ message: "Libro no encontrado" });
   }
   
 });
